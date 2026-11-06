@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Activate noproctor</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <!-- connect-src is the billing Function URL only (for /claim after checkout).
+       Keep this and the BILLING_URL constant below in sync. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://7xv2cav7t3iceljjbwjn4akknm0kymha.lambda-url.us-east-1.on.aws; form-action 'self'; base-uri 'none'">
+  <link rel="stylesheet" href="/assets/noproctor.css">
+  <style>
+    body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 28px 16px; }
+    .act { width: 100%; max-width: 460px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 34px 30px; text-align: center; }
+    .act .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; margin-bottom: 18px; }
+    .act .brand .mark { width: 24px; height: 24px; border-radius: 7px; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; font-size: 15px; }
+    .act h1 { font-size: 23px; margin: 6px 0; }
+    .act p { color: var(--ink-dim); font-size: 14.5px; margin: 8px 0; }
+    .act .ok-mark { width: 52px; height: 52px; border-radius: 50%; background: rgba(55,208,122,0.14); color: var(--ok); display: grid; place-items: center; font-size: 26px; margin: 0 auto 6px; }
+    .act .email { color: var(--ink); font-weight: 600; }
+    .divider { margin: 22px 0 14px; border-top: 1px solid var(--line-soft); }
+    .label { font-size: 12px; color: var(--ink-faint); text-align: left; margin-bottom: 6px; }
+    .code-row { display: flex; gap: 8px; }
+    #code { flex: 1; padding: 11px 12px; font-family: var(--mono); font-size: 13px; color: var(--ink); background: #000; border: 1px solid #333; border-radius: 9px; overflow: hidden; text-overflow: ellipsis; }
+    #copy { padding: 11px 15px; font-size: 13px; font-weight: 600; color: var(--ink); background: #1e1e1e; border: 1px solid #333; border-radius: 9px; cursor: pointer; white-space: nowrap; }
+    #copy:hover { border-color: var(--accent); }
+    .spin { width: 34px; height: 34px; border-radius: 50%; border: 3px solid #2a2a2a; border-top-color: var(--accent); margin: 10px auto; animation: sp 0.8s linear infinite; }
+    @keyframes sp { to { transform: rotate(360deg); } }
+    .fine { font-size: 12.5px; color: var(--ink-faint); margin-top: 20px; }
+    .fine a { color: var(--accent); }
+    .muted { color: var(--ink-faint); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="act">
+    <div class="brand"><span class="mark">n</span> noproctor</div>
+
+    <!-- working: waiting on /claim after checkout -->
+    <div id="view-working" hidden>
+      <div class="spin"></div>
+      <h1>Confirming your payment&hellip;</h1>
+      <p id="working-note">This takes a few seconds.</p>
+    </div>
+
+    <!-- ready: we have a token, hand it to the app -->
+    <div id="view-ready" hidden>
+      <div id="paid-badge" hidden>
+        <div class="ok-mark">&#10003;</div>
+        <p style="margin-bottom:2px">Payment confirmed<span id="paid-email-wrap">, <span class="email" id="paid-email"></span></span>.</p>
+      </div>
+      <h1 id="ready-title">Open noproctor to finish</h1>
+      <p>Click below on the computer where noproctor is installed.</p>
+      <a id="open" class="btn lg" href="#" style="margin:16px 0 4px">Open noproctor</a>
+      <p class="muted">Nothing happened? Paste this code into the app's Sign in box (Ctrl/Cmd+Shift+A).</p>
+      <div class="divider"></div>
+      <div class="label">Activation code</div>
+      <div class="code-row">
+        <input id="code" type="text" readonly value="">
+        <button id="copy" type="button">Copy</button>
+      </div>
+      <p class="fine">Don't have the app yet? <a href="/#download">Download noproctor</a>.</p>
+    </div>
+
+    <!-- cancelled checkout -->
+    <div id="view-cancelled" hidden>
+      <h1>Checkout cancelled</h1>
+      <p>No payment was taken. You can pick a plan whenever you are ready.</p>
+      <a class="btn lg" href="/#pricing" style="margin-top:16px">Back to pricing</a>
+    </div>
+
+    <!-- missing/invalid link, or an error -->
+    <div id="view-error" hidden>
+      <h1 id="error-title">Link incomplete</h1>
+      <p id="error-msg">This activation link is missing its code. Open the most recent email from noproctor, or email <a href="mailto:support@noproctor.com">support@noproctor.com</a>.</p>
+      <a class="btn ghost lg" href="/" style="margin-top:16px">Go to noproctor.com</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var BILLING_URL = "https://7xv2cav7t3iceljjbwjn4akknm0kymha.lambda-url.us-east-1.on.aws";
+      var TOKEN_RE = /^[A-Za-z0-9_-]{16,512}$/;
+      var SESSION_RE = /^cs_[A-Za-z0-9_]+$/;
+
+      var params = new URLSearchParams(location.search);
+      var token = (params.get("token") || params.get("t") || "").trim();
+      var sessionId = (params.get("session_id") || "").trim();
+      var cancelled = params.get("cancelled") === "1";
+
+      function show(id) {
+        ["view-working", "view-ready", "view-cancelled", "view-error"].forEach(function (v) {
+          document.getElementById(v).hidden = (v !== id);
+        });
+      }
+      function fail(title, msg) {
+        if (title) document.getElementById("error-title").textContent = title;
+        if (msg) document.getElementById("error-msg").textContent = msg;
+        show("view-error");
+      }
+
+      // Hand a magic token to the installed app. Fires the deep link and shows a
+      // copyable fallback. This page never spends the token itself.
+      function handToApp(tok, opts) {
+        opts = opts || {};
+        var deeplink = "noproctor://activate?token=" + encodeURIComponent(tok);
+        document.getElementById("open").setAttribute("href", deeplink);
+        document.getElementById("code").value = tok;
+        if (opts.paid) {
+          document.getElementById("paid-badge").hidden = false;
+          if (opts.email) {
+            document.getElementById("paid-email").textContent = opts.email;
+          } else {
+            document.getElementById("paid-email-wrap").hidden = true;
+          }
+        }
+        show("view-ready");
+        // Try the deep link once. Browsers may block a scheme launch without a
+        // gesture, so the visible button is the reliable path.
+        try { location.assign(deeplink); } catch (e) { /* button covers it */ }
+
+        var copy = document.getElementById("copy");
+        var code = document.getElementById("code");
+        copy.addEventListener("click", function () {
+          code.select();
+          var done = function () { copy.textContent = "Copied"; setTimeout(function () { copy.textContent = "Copy"; }, 1500); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code.value).then(done, function () { try { document.execCommand("copy"); } catch (e) {} done(); });
+          } else { try { document.execCommand("copy"); } catch (e) {} done(); }
+        });
+      }
+
+      // After checkout: trade the paid session_id for a fresh magic token.
+      // Retries a few times on 402 while the payment is still settling.
+      function claim(attempt) {
+        attempt = attempt || 0;
+        show("view-working");
+        fetch(BILLING_URL.replace(/\/$/, "") + "/claim", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ session_id: sessionId, product: "desk" })
+        }).then(function (r) {
+          return r.json().then(function (data) { return { status: r.status, data: data }; });
+        }).then(function (res) {
+          if (res.status === 200 && res.data && res.data.token) {
+            handToApp(res.data.token, { paid: true, email: res.data.email });
+            return;
+          }
+          if ((res.status === 402 || res.status === 429) && attempt < 6) {
+            document.getElementById("working-note").textContent = "Almost there…";
+            setTimeout(function () { claim(attempt + 1); }, 1800);
+            return;
+          }
+          if (res.status === 409) {
+            fail("Already activated", (res.data && res.data.error) || "This checkout was already used. Open the app and sign in, or use the link we emailed you.");
+            return;
+          }
+          fail("We couldn't confirm that", (res.data && res.data.error) ||
+            "Open the activation link we emailed you, or email support@noproctor.com.");
+        }).catch(function () {
+          if (attempt < 6) { setTimeout(function () { claim(attempt + 1); }, 1800); return; }
+          fail("Network problem", "Check your connection and reload this page, or email support@noproctor.com.");
+        });
+      }
+
+      if (cancelled) { show("view-cancelled"); return; }
+      if (TOKEN_RE.test(token)) { handToApp(token, {}); return; }
+      if (SESSION_RE.test(sessionId)) { claim(0); return; }
+      fail(null, null);
+    })();
+  </script>
+</body>
+</html>

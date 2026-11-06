@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>noproctor - the invisible answer overlay for online tests</title>
+  <meta name="description" content="noproctor is a desktop overlay that reads your screen and shows the answer in a window hidden from screen sharing and recording on Windows. $24.99/mo. 7-day money-back guarantee.">
+  <link rel="canonical" href="https://noproctor.com/">
+  <meta property="og:title" content="noproctor - the invisible answer overlay">
+  <meta property="og:description" content="Press a hotkey, get the answer, overlaid on your screen and hidden from screen shares on Windows.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://noproctor.com/">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <!-- connect-src is the one backend (billing Function URL) + Stripe for checkout.
+       Keep this and the BILLING_URL constant below in sync. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://7xv2cav7t3iceljjbwjn4akknm0kymha.lambda-url.us-east-1.on.aws; form-action 'self'; base-uri 'none'">
+  <link rel="stylesheet" href="/assets/noproctor.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="/"><span class="mark">n</span> noproctor</a>
+      <div class="nav-links">
+        <a href="#how" class="hide-sm">How it works</a>
+        <a href="#pricing" class="hide-sm">Pricing</a>
+        <a href="#faq" class="hide-sm">FAQ</a>
+        <a href="#pricing" class="btn">Get noproctor</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Desktop overlay &middot; Windows &amp; macOS</span>
+      <h1>Press a key. Get the <span class="hl">answer</span>.<br>Invisible on Windows.</h1>
+      <p class="sub">noproctor is a desktop app that reads whatever is on your screen and shows the answer in a floating window - hidden from screen sharing and recording on Windows.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn lg">Get noproctor - $24.99/mo</a>
+        <a href="#how" class="btn ghost lg">See how it works</a>
+      </div>
+      <p class="hero-note"><strong>7-day money-back guarantee.</strong> Cancel anytime.</p>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="mock-body">
+          <div class="mock-q">Question 7 of 20 &middot; A projectile is launched at 25 m/s at 40&deg; above the horizontal. What is its maximum height? (g = 9.8 m/s&sup2;)</div>
+          <div class="mock-overlay">
+            <div class="tag">noproctor</div>
+            <div class="ans">&asymp; 13.2 m</div>
+            <div class="meta">(25 &middot; sin40&deg;)&sup2; / (2 &middot; 9.8) &middot; answered in 2.1 s</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="how">
+    <div class="wrap center">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-title">Three keys, one answer</h2>
+      <p class="section-lead">No tab switching, no second phone, no copy-paste. The answer comes to you.</p>
+      <div class="grid cols-3" style="margin-top:44px;text-align:left">
+        <div class="card">
+          <div class="step-n">STEP 1</div>
+          <h3>Install and sign in</h3>
+          <p>Download noproctor, open it, and activate with the link we email you after checkout. It sits quietly in the background.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">STEP 2</div>
+          <h3>Press the hotkey</h3>
+          <p>On any question, press <strong>Ctrl+Shift+S</strong> (Cmd on Mac). noproctor captures your screen - no screenshots are saved to your disk.</p>
+        </div>
+        <div class="card">
+          <div class="step-n">STEP 3</div>
+          <h3>Read the answer</h3>
+          <p>The answer appears in a small overlay in seconds. On Windows it stays hidden from screen sharing and recording.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow">Invisibility, honestly</span>
+        <h2 class="section-title">Hidden where it can be, visible where it can't</h2>
+        <p class="section-lead" style="margin:0 auto">We would rather tell you the truth than sell you a surprise. Here is exactly what each platform does.</p>
+      </div>
+      <div class="plat" style="margin-top:42px">
+        <div class="card">
+          <span class="pill win">Windows</span>
+          <h3 style="margin:12px 0 7px">Invisible on screen share</h3>
+          <p>The overlay is excluded from screen capture at the OS level, so it does not appear in Zoom, Teams, Google Meet, OBS, or a screen recording. Someone watching your shared screen sees your test - not noproctor.</p>
+        </div>
+        <div class="card">
+          <span class="pill mac">macOS</span>
+          <h3 style="margin:12px 0 7px">Same answers, visible overlay</h3>
+          <p>noproctor works the same way and gives the same answers on a Mac, but since macOS 15 Apple no longer lets apps hide from screen capture. On a Mac the overlay <strong>is</strong> visible in screen shares. If invisibility matters, use Windows.</p>
+        </div>
+      </div>
+      <p class="center" style="margin-top:26px;color:var(--ink-faint);font-size:13.5px">noproctor is an ordinary desktop app. It does not break into, disable, or defeat lockdown browsers or remote proctoring software, and we never claim it does.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap center">
+      <span class="eyebrow">Why noproctor</span>
+      <h2 class="section-title">Built to be fast and out of the way</h2>
+      <div class="grid cols-3" style="margin-top:44px;text-align:left">
+        <div class="card">
+          <div class="ic">&#9889;</div>
+          <h3>Answers in seconds</h3>
+          <p>A screenshot goes straight to our model and the answer comes back in a couple of seconds, right where you are looking.</p>
+        </div>
+        <div class="card">
+          <div class="ic">&#128218;</div>
+          <h3>Any subject</h3>
+          <p>Math, chemistry, reading, coding, multiple choice, written answers. If it is on your screen, noproctor can read it.</p>
+        </div>
+        <div class="card">
+          <div class="ic">&#128433;</div>
+          <h3>One hotkey, no fuss</h3>
+          <p>No browser extension, no tab juggling, no second device. Press one key combination and keep working.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap center">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="section-title">Pick a plan, start in a minute</h2>
+      <p class="section-lead" style="margin:0 auto">Both plans are the full app. Cancel anytime in two clicks.</p>
+
+      <div class="plans">
+        <div class="plan">
+          <div class="pname">Monthly</div>
+          <div class="price">$24.99<span>/mo</span></div>
+          <div class="sub">Billed monthly</div>
+          <ul>
+            <li>The full noproctor app</li>
+            <li>Windows &amp; macOS</li>
+            <li>Unlimited answers</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <button class="btn block pricing-buy" data-plan="month">Get Monthly</button>
+        </div>
+        <div class="plan featured">
+          <span class="ribbon">Save 20%</span>
+          <div class="pname">Semester</div>
+          <div class="price">$79.99<span>/4 mo</span></div>
+          <div class="sub">$20/mo, billed once for the term</div>
+          <ul>
+            <li>Everything in Monthly</li>
+            <li>Covers a full semester</li>
+            <li>One payment, no monthly renewals</li>
+            <li>Best value for exam season</li>
+          </ul>
+          <button class="btn block pricing-buy" data-plan="term">Get Semester</button>
+        </div>
+      </div>
+      <div class="buy-error" id="buy-error"></div>
+      <p class="guarantee"><strong>7-day money-back guarantee.</strong> If noproctor does not work for you, email us within 7 days for a full refund.</p>
+      <p style="margin-top:14px;color:var(--ink-faint);font-size:13.5px">Already paid? <a href="/activate/">Activate noproctor</a>.</p>
+    </div>
+  </section>
+
+  <section id="download" class="band">
+    <div class="wrap center">
+      <span class="eyebrow">Download</span>
+      <h2 class="section-title">Get the app</h2>
+      <p class="section-lead" style="margin:0 auto">You can subscribe first or download first - you will sign in either way.</p>
+      <div class="hero-cta" style="margin-top:30px">
+        <a href="https://github.com/serenearyal/noproctor/releases/latest" class="btn lg" rel="noopener">Download for Windows</a>
+        <a href="https://github.com/serenearyal/noproctor/releases/latest" class="btn ghost lg" rel="noopener">Download for macOS</a>
+      </div>
+      <p class="hero-note">Windows 10/11 &middot; macOS 12+. The Windows build is where the overlay is invisible on screen shares.</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title">Questions, answered</h2>
+      </div>
+      <div class="faq" style="margin-top:36px">
+        <details open>
+          <summary>What exactly is noproctor?</summary>
+          <p>A small desktop app. You press a hotkey, it takes a picture of your screen, sends it to our AI, and shows the answer in a floating window. On Windows that window is hidden from screen sharing and recording.</p>
+        </details>
+        <details>
+          <summary>Is it really invisible?</summary>
+          <p>On Windows, yes - the overlay is excluded from screen capture by the operating system, so it does not show up in Zoom, Teams, Meet, OBS, or a screen recording. On macOS it is not invisible: since macOS 15 Apple no longer lets apps hide from capture, so the overlay is visible in screen shares on a Mac.</p>
+        </details>
+        <details>
+          <summary>Does it work with LockDown Browser or proctoring software?</summary>
+          <p>noproctor is a normal desktop app. It does not disable or get around lockdown browsers or remote proctoring (camera and screen monitoring), and we do not claim it does. The invisibility is specifically about screen sharing and screen recording on Windows.</p>
+        </details>
+        <details>
+          <summary>What subjects and question types work?</summary>
+          <p>Anything that fits on your screen: math, science, reading comprehension, coding, multiple choice, and written responses. If you can see the question, noproctor can read it.</p>
+        </details>
+        <details>
+          <summary>Which platforms are supported?</summary>
+          <p>Windows 10 and 11, and macOS 12 and later. The invisibility feature is Windows-only for the reason above.</p>
+        </details>
+        <details>
+          <summary>Can I get a refund?</summary>
+          <p>Yes. If noproctor does not work for you, email <a href="mailto:support@noproctor.com">support@noproctor.com</a> within 7 days of your purchase and we will refund you in full.</p>
+        </details>
+        <details>
+          <summary>How do I cancel?</summary>
+          <p>Cancel anytime from the billing portal linked in your account, or email support. Your plan stays active until the end of the period you already paid for.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip center">
+    <div class="wrap">
+      <h2 class="section-title">Stop guessing. Start passing.</h2>
+      <p class="section-lead" style="margin:0 auto 28px">One hotkey away from the answer, hidden on Windows.</p>
+      <a href="#pricing" class="btn lg">Get noproctor - $24.99/mo</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <div><a class="logo" href="/" style="font-size:16px"><span class="mark" style="width:22px;height:22px;font-size:14px">n</span> noproctor</a></div>
+      <div class="foot-links">
+        <a href="/activate/">Activate</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="mailto:support@noproctor.com">support@noproctor.com</a>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:14px;color:var(--ink-faint);font-size:12.5px">&copy; 2026 noproctor. For use on your own tests. You are responsible for following your school's rules.</div>
+  </footer>
+
+  <script>
+    // --- backend (billing Function URL). Keep in sync with the CSP above. ---
+    var BILLING_URL = "https://7xv2cav7t3iceljjbwjn4akknm0kymha.lambda-url.us-east-1.on.aws";
+
+    // --- minimal visit id + source capture, so a sale can be attributed. ---
+    (function () {
+      function readCookie(name) {
+        var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+        return m ? decodeURIComponent(m[1]) : "";
+      }
+      function setCookie(name, value, days) {
+        var d = new Date(); d.setTime(d.getTime() + days * 864e5);
+        document.cookie = name + "=" + encodeURIComponent(value) + ";path=/;max-age=" + (days * 86400) + ";SameSite=Lax";
+      }
+      var vid = readCookie("np_vid");
+      if (!/^[0-9a-f]{16}$/.test(vid)) {
+        var a = new Uint8Array(8);
+        (window.crypto || {}).getRandomValues ? crypto.getRandomValues(a) : a.forEach(function (_, i) { a[i] = Math.floor(Math.random() * 256); });
+        vid = Array.prototype.map.call(a, function (b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+        setCookie("np_vid", vid, 90);
+      }
+      window.npVisit = vid;
+      if (!readCookie("np_src")) {
+        var p = new URLSearchParams(location.search);
+        var src = p.get("utm_source") || p.get("src") || (document.referrer ? "ref:" + (document.referrer.split("/")[2] || "") : "direct");
+        setCookie("np_src", String(src).slice(0, 80), 90);
+      }
+      window.npSource = readCookie("np_src") || "direct";
+    })();
+
+    // --- checkout: one /checkout call per plan, product desk. ---
+    (function () {
+      var buttons = document.querySelectorAll(".pricing-buy");
+      var error = document.getElementById("buy-error");
+      if (!buttons.length) return;
+
+      function showError(message) { error.textContent = message; error.style.display = "block"; }
+
+      async function requestCheckout(plan) {
+        var payload = { product: "desk", plan: plan, source: window.npSource, vid: window.npVisit };
+        var response = await fetch(BILLING_URL.replace(/\/$/, "") + "/checkout", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        var data = await response.json();
+        if (!response.ok || !data.url) { throw new Error(data.error || "Checkout unavailable"); }
+        return data.url;
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener("click", async function () {
+          if (button.disabled) return;
+          error.style.display = "none";
+          button.disabled = true;
+          var original = button.textContent;
+          button.textContent = "Opening checkout…";
+          try {
+            var plan = /^(month|term)$/.test(button.dataset.plan || "") ? button.dataset.plan : "month";
+            window.location.href = await requestCheckout(plan);
+          } catch (err) {
+            button.disabled = false;
+            button.textContent = original;
+            showError("Couldn't start checkout. Please try again, or email support@noproctor.com.");
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
