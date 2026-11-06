@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to hide a window from screen sharing and recording (2026)</title>
+  <meta name="description" content="Why some windows stay hidden from Zoom, Teams and OBS on Windows, why macOS can no longer do it, and how an answer overlay like noproctor uses it.">
+  <link rel="canonical" href="https://noproctor.com/guides/hide-from-screen-share/">
+  <meta property="og:title" content="How to hide a window from screen sharing">
+  <meta property="og:description" content="The real mechanism behind capture-excluded windows on Windows - and the macOS limit.">
+  <meta property="og:url" content="https://noproctor.com/guides/hide-from-screen-share/">
+  <meta name="theme-color" content="#0e0e0e">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'">
+  <link rel="stylesheet" href="/assets/noproctor.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"How to hide a window from screen sharing and recording","datePublished":"2026-11-06","dateModified":"2026-11-06","author":{"@type":"Organization","name":"noproctor"},"publisher":{"@type":"Organization","name":"noproctor"},"mainEntityOfPage":"https://noproctor.com/guides/hide-from-screen-share/"}
+  </script>
+</head>
+<body>
+  <nav class="nav"><div class="wrap nav-inner">
+    <a class="logo" href="/"><span class="mark">n</span> noproctor</a>
+    <div class="nav-links"><a href="/#pricing" class="btn">Get noproctor</a></div>
+  </div></nav>
+
+  <main class="wrap doc">
+    <h1>How to hide a window from screen sharing and recording</h1>
+    <div class="updated">Updated 6 November 2026</div>
+
+    <p>When you share your screen on Zoom, Teams, Google Meet, or record it with OBS, those apps ask the operating system for a copy of what is on screen. On Windows, a window can tell the operating system "leave me out of that copy." When it does, the window stays on your display but never appears in the shared or recorded video. This is a real, built-in feature - not a trick.</p>
+
+    <h2>The Windows mechanism</h2>
+    <p>Windows exposes a per-window display-affinity setting. An app can mark its own window as excluded from capture, and from then on the compositor paints that window to your monitor but omits it from any screen capture - whether that capture comes from a meeting app, a recorder, or a screenshot tool. You keep seeing the window; the capture does not. This is why a correctly built overlay can be visible to you and invisible on a shared screen at the same time.</p>
+
+    <h2>Why macOS is different</h2>
+    <p>macOS used to allow something similar, but since macOS 15 Apple routes screen capture through a framework that does not let an app hide its own windows from capture. On a current Mac, any window you can see can also be captured. So an overlay that is invisible on Windows will be <strong>visible</strong> in a screen share on macOS. Any tool that claims full invisibility on a modern Mac is overpromising.</p>
+
+    <h2>How noproctor uses this</h2>
+    <p>noproctor is a desktop app that captures your screen when you press a hotkey, sends it to an AI model, and shows the answer in a small overlay. On Windows, that overlay is marked as excluded from capture, so it does not appear in a screen share or recording. On macOS it runs the same way but, for the reason above, the overlay is visible in captures. We state this plainly rather than let you find out mid-test.</p>
+    <p>noproctor does not disable or bypass lockdown browsers or remote proctoring (webcam and screen monitoring). The capture-exclusion above is specifically about screen sharing and screen recording on Windows.</p>
+
+    <div class="center" style="margin-top:40px">
+      <a href="/#pricing" class="btn lg">Get noproctor - $24.99/mo</a>
+      <p class="note-small">7-day money-back guarantee. Cancel anytime.</p>
+    </div>
+  </main>
+
+  <footer><div class="wrap foot-inner">
+    <div><a class="logo" href="/" style="font-size:16px"><span class="mark" style="width:22px;height:22px;font-size:14px">n</span> noproctor</a></div>
+    <div class="foot-links"><a href="/vs/cluely/">vs Cluely</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:support@noproctor.com">support@noproctor.com</a></div>
+  </div></footer>
+</body>
+</html>
